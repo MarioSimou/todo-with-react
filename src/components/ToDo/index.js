@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Todo = ({ children }) => {
-    console.log( children )
     return (
         <div className="sixteen wide column">
             <div className="ui grid">

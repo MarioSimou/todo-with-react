@@ -2,7 +2,7 @@ import React,  { useRef , useState  } from 'react'
 import EditButton from '../EditButton'
 import DeleteButton from '../DeleteButton'
 
-const List = ({ header , content }) => {
+const List = ({ content }) => {
     const list = useRef( null );
     const textBar = useRef( null );
     const [ edit , setEdit ] = useState( false )
@@ -10,8 +10,11 @@ const List = ({ header , content }) => {
 
     const onSubmitEdit = ( e ) => {
         e.preventDefault();
-        setContent( textBar.current.value )
-        setEdit( false )        
+        const { value } = textBar.current
+        if( value){
+            setContent( textBar.current.value )
+            setEdit( false )            
+        }
     }
     const decideEdit = ( onSubmitEdit ) => {
         switch ( edit ){
@@ -29,13 +32,10 @@ const List = ({ header , content }) => {
         } 
     }
 
-    console.log('rerendering')
-
     return (
 
         <div className="ui list" ref={ list } >
             <div className="item">
-                <div className="header">{ header }</div>
                 <div className="right floated">
                     <DeleteButton onClickDelete={ e => list.current.remove() } />
                 </div>
